@@ -1,6 +1,7 @@
 {
-    "name": "zwiki",
-    "dockerFile": "../.devcontainer/docker-compose.yaml",
+    "name": "ze-wiki",
+    "dockerComposeFile": ["../.docker/docker-compose.workspace.yaml", "../.docker/docker-compose.services.yaml"],
+    "service": "ze-wiki",
     "forwardPorts": [7777],
     "features": {
       "ghcr.io/devcontainers/features/node:1": {
@@ -8,6 +9,7 @@
         "nodeGypDependencies": true
       }
     },
+    "initializeCommand": "cat ../.env >> devcontainer.env",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "npm install -g npm@latest && npm install -g @devcontainers/cli",
     "customizations": {
