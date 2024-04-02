@@ -8,9 +8,8 @@ build :
 	docker compose --file .docker/docker-compose.services.yaml up --detach
 
 uuid=$(shell docker ps -aqf "name=^mediawiki_service_container")
-postbuild :
+configure :
 	docker container cp $(uuid):/var/www/html/LocalSettings.php ./LocalSettings.php
-	@echo "$(uuid)"
 
 start :
 	docker compose --file .docker/docker-compose.services.yaml up --detach 
