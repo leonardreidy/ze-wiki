@@ -9,7 +9,7 @@
         "nodeGypDependencies": true
       }
     },
-    "initializeCommand": "cat .env >> .devcontainer/.env",
+    "initializeCommand": "cat .env > .devcontainer/.env",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "npm install -g npm@latest && npm install -g @devcontainers/cli",
     "customizations": {
