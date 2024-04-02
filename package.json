@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "setup": "docker compose up --build --file .docker/docker-compose.yaml",
+    "setup": "docker compose --file .docker/docker-compose.services.yaml up",
     "start": "docker compose up"
   }
 }
