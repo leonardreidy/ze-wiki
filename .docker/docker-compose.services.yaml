@@ -5,6 +5,7 @@
 version: '3'
 services:
   mediawiki:
+    container_name: mediawiki_service_container
     image: mediawiki
     restart: always
     ports:
@@ -16,9 +17,10 @@ services:
       # After initial setup, download LocalSettings.php to the same directory as
       # this yaml and uncomment the following line and use compose to restart
       # the mediawiki service
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
+      - ./LocalSettings.php:/var/www/html/LocalSettings.php
   # This key also defines the name of the database host used during setup instead of the default "localhost"
   database:
+    container_name: mediawiki_database_container
     image: mariadb
     restart: always
     environment:
