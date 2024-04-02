@@ -9,6 +9,7 @@
   "scripts": {
     "prebuild": "make clean install",
     "build": "make build",
+    "postbuild": "make postbuild",
     "configure": "make configure",
     "start": "make start",
     "stop": "make stop"
