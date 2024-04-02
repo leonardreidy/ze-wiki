@@ -1,0 +1,12 @@
+# Workspace container - required to identify the target docker compose 'service'
+# to standup the devcontainer
+version: '3'
+services:
+  ze-wiki:
+    image: mcr.microsoft.com/devcontainers/javascript-node:18
+    ports:
+      - 6666:6666
+    links:
+      - database
+    volumes:
+      - ./:/opt/app
