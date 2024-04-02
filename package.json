@@ -7,7 +7,12 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "setup": "docker compose --file .docker/docker-compose.services.yaml up",
-    "start": "docker compose up"
+    "prebuild": "make clean install",
+    "build": "make build",
+    "postbuild": "make postbuild",
+    "start": "make start",
+    "stop": "make stop"
+  },
+  "dependencies": {
   }
 }
