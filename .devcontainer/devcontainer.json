@@ -1,0 +1,25 @@
+{
+    "name": "zwiki",
+    "dockerFile": "../.devcontainer/docker-compose.yaml",
+    "forwardPorts": [7777],
+    "features": {
+      "ghcr.io/devcontainers/features/node:1": {
+        "version": "18.17.0",
+        "nodeGypDependencies": true
+      }
+    },
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "npm install -g npm@latest && npm install -g @devcontainers/cli",
+    "customizations": {
+      "vscode": {
+          "extensions": [
+            "dbaeumer.vscode-eslint",
+            "EditorConfig.EditorConfig",
+            "khan.two-monokai",
+            "mads-hartmann.bash-ide-vscode"
+          ]
+      }
+    },
+    "runArgs": ["--network=wiki-net"],
+    "remoteUser": "node"
+  }

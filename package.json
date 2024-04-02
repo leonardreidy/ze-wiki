@@ -1,0 +1,13 @@
+{
+  "name": "ze-wiki",
+  "version": "0.0.1",
+  "description": "Wiki built with MediaWiki (WikiPedia)",
+  "main": "index.js",
+  "author": "Leonard M Reidy <leonard.reidy@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "setup": "docker compose up --build --file .docker/docker-compose.yaml",
+    "start": "docker compose up"
+  }
+}
