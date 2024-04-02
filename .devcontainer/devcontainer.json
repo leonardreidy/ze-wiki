@@ -2,7 +2,7 @@
     "name": "ze-wiki",
     "dockerComposeFile": ["../.docker/docker-compose.workspace.yaml", "../.docker/docker-compose.services.yaml"],
     "service": "ze-wiki",
-    "forwardPorts": [7979],
+    "forwardPorts": [8080],
     "features": {
       "ghcr.io/devcontainers/features/node:1": {
         "version": "18.17.0",
