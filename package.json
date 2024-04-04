@@ -12,6 +12,7 @@
     "postbuild": "make postbuild",
     "configure": "make configure",
     "start": "make start",
+    "copy": "make copy",
     "stop": "make stop"
   },
   "dependencies": {
