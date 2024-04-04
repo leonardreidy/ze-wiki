@@ -1,6 +1,6 @@
 {
     "name": "ze-wiki",
-    "dockerComposeFile": ["../.docker/docker-compose.workspace.yaml", "../.docker/docker-compose.services.yaml"],
+    "dockerComposeFile": ["docker-compose.workspace.yaml", "docker-compose.services.yaml"],
     "service": "ze-wiki",
     "forwardPorts": [8080],
     "features": {
@@ -9,7 +9,6 @@
         "nodeGypDependencies": true
       }
     },
-    "initializeCommand": "cat .env > .devcontainer/.env",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "npm install -g npm@latest && npm install -g @devcontainers/cli",
     "customizations": {
@@ -22,6 +21,5 @@
           ]
       }
     },
-    "runArgs": ["--network=wiki-net"],
     "remoteUser": "node"
   }
