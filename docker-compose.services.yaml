@@ -1,19 +1,21 @@
 # MediaWiki with MariaDB/MySQL DB
 #
-# Access via "http://localhost:7777"
-#   (or "http://$(docker-machine ip):7777" if using docker-machine)
+# Access via "http://localhost:8080"
+#   (or "http://$(docker-machine ip):8080" if using docker-machine)
 version: '3'
 services:
   mediawiki:
     container_name: mediawiki_service_container
+    env_file:
+      - .env
     image: mediawiki
-    restart: always
-    ports:
-      - 8080:80
     links:
       - database
+    ports:
+      - 8080:80
+    restart: always
     volumes:
-      - images:/var/www/html/images
+      - ./images:/var/www/html/images
       # After initial setup, download LocalSettings.php to the same directory as
       # this yaml and uncomment the following line and use compose to restart
       # the mediawiki service
@@ -22,16 +24,18 @@ services:
   database:
     container_name: mediawiki_database_container
     image: mariadb
+    ports:
+      - 3306:3306
     restart: always
-    environment:
-      # @see https://phabricator.wikimedia.org/source/mediawiki/browse/master/includes/DefaultSettings.php
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-mywiki}
-      MYSQL_USER: ${MYSQL_USER:-wikiuser}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-example}
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+    command: --default-authentication-plugin=mysql_native_password --wait-timeout=1830 --max_allowed_packet=64M --init-file=/setup.db.sql --sql_mode="NO_ENGINE_SUBSTITUTION"
     volumes:
-      - db:/var/lib/mysql
+      - ./db:/var/lib/mysql
+      - ./scripts/setup.db.sql:/setup.db.sql
 
 volumes:
   images:
   db:
+
+networks:
+  default:
+    name: wikinet
