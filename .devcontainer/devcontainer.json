@@ -1,6 +1,6 @@
 {
     "name": "ze-wiki",
-    "dockerComposeFile": ["docker-compose.workspace.yaml", "docker-compose.services.yaml"],
+    "dockerComposeFile": ["../docker-compose.workspace.yaml", "../docker-compose.services.yaml"],
     "service": "ze-wiki",
     "forwardPorts": [3097],
     "features": {
