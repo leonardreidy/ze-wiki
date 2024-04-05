@@ -1,41 +1,33 @@
-# MediaWiki with MariaDB/MySQL DB
-#
-# Access via "http://localhost:8080"
-#   (or "http://$(docker-machine ip):8080" if using docker-machine)
-version: '3'
+version: "3"
 services:
-  mediawiki:
-    container_name: mediawiki_service_container
-    env_file:
-      - .env
-    image: mediawiki
-    links:
-      - database
-    ports:
-      - 8080:80
-    restart: always
+  db:
+    container_name: wikijs_db_container
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: wiki
+      POSTGRES_PASSWORD: wikijsrocks
+      POSTGRES_USER: wikijs
+    logging:
+      driver: "none"
+    restart: unless-stopped
     volumes:
-      - ./images:/var/www/html/images
-      # After initial setup, download LocalSettings.php to the same directory as
-      # this yaml and uncomment the following line and use compose to restart
-      # the mediawiki service
-      # - ./LocalSettings.php:/var/www/html/LocalSettings.php
-  # This key also defines the name of the database host used during setup instead of the default "localhost"
-  database:
-    container_name: mediawiki_database_container
-    image: mariadb
+      - db-data:/var/lib/postgresql/data
+
+  wiki:
+    container_name: wikijs_application_container
+    image: ghcr.io/requarks/wiki:2
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: wikijsrocks
+      DB_NAME: wiki
+    restart: unless-stopped
     ports:
-      - 3306:3306
-    restart: always
-    command: --default-authentication-plugin=mysql_native_password --wait-timeout=1830 --max_allowed_packet=64M --init-file=/setup.db.sql --sql_mode="NO_ENGINE_SUBSTITUTION"
-    volumes:
-      - ./db:/var/lib/mysql
-      - ./scripts/setup.db.sql:/setup.db.sql
+      - "3097:3000"
 
 volumes:
-  images:
-  db:
-
-networks:
-  default:
-    name: wikinet
+  db-data:
