@@ -11,11 +11,12 @@ build :
 	docker compose --file docker-compose.services.yaml up --detach
 
 postbuild:
-	open http://localhost:8080
+	sleep 5
+	open http://localhost:3097
 
-uuid=$(shell docker ps -aqf "name=^mediawiki_service_container")
-copy :
-	docker container cp $(uuid):/var/www/html/LocalSettings.php ./LocalSettings.php
+# uuid=$(shell docker ps -aqf "name=^wikjs_application_container")
+# copy :
+# 	docker container cp $(uuid):/path/to/file/somefile.js ./somefile.js
 
 start :
 	docker compose --file docker-compose.services.yaml up --detach 
