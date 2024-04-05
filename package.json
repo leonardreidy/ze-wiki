@@ -1,7 +1,7 @@
 {
   "name": "ze-wiki",
-  "version": "0.0.1",
-  "description": "Wiki built with MediaWiki (WikiPedia)",
+  "version": "0.0.2",
+  "description": "Wiki built with WikiJS",
   "main": "index.js",
   "author": "Leonard M Reidy <leonard.reidy@gmail.com>",
   "license": "MIT",
